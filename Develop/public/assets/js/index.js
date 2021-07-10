@@ -117,7 +117,7 @@ const handleRenderSaveBtn = () => {
 };
 
 // Render the list of note titles
-const renderNoteList = async notes => {
+const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
   if (window.location.pathname === '/notes') {
     noteList.forEach(el => (el.innerHTML = ''));
@@ -157,8 +157,8 @@ const renderNoteList = async notes => {
   if (jsonNotes.length === 0) {
     noteListItems.push(createLi('No saved Notes', false));
   }
-
-  jsonNotes.forEach((note) => {
+// added the Array.from because this function kept giving back errors
+  Array.from(jsonNotes).forEach((note) => {
     const li = createLi(note.title);
     li.dataset.note = JSON.stringify(note);
 
