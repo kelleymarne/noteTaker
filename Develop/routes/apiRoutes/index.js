@@ -36,9 +36,17 @@ router.post('/notes', (req, res) => {
     
 });
 
-router.delete('/notes', (req, res) => {
-
-})
+router.delete('/notes/:id', (req, res) => {
+    const deleteNote = req.params.id;
+    for (let i = 0; i < notes.length; i++) {
+        if(notes[i].id === Number(deleteNote)) {
+            notes.splice(i, 1);
+        };
+       fs.writeFile(path.join(__dirname, '../../db/db.json'), (err) => {
+           if (err) throw err;
+       });
+    }
+});
 
 
 module.exports = router;
