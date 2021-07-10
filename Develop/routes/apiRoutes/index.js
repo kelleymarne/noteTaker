@@ -11,18 +11,34 @@ router.get('/notes', (req, res) => {
 
 
 router.post('/notes', (req, res) => {
-    let data = fs.readFileSync(path.join(__dirname, '../../db/db.json'), 'utf8');
-    let notesHistory = JSON.parse(data);
-    // console.log(notesHistory, typeof notesHistory)
-    // let newNote = req.body;
-    let newNote = {
-        title: req.body.title,
-        text: req.body.text,
-    };
+    let notesArray = JSON.parse(fs.readFileSync(path.join(__dirname, '../../db/db.json'), 'utf8'));
+    let newNote = req.body;
+    // let newNote = {
+    //     title: req.body.title,
+    //     text: req.body.text,
+    // };
+    notesArray.push(newNote);
+    let id = 0;
+    notesArray.forEach((note) => {
+        note.id = id;
+        id++;
+        return notesArray;
+    });
 
-    notesHistory.push(newNote);
-    fs.writeFileSync(path.join(__dirname, '../../db/db.json'), JSON.stringify(notesHistory));
-    return res.json(notesHistory);
+    fs.writeFileSync(
+        path.join(__dirname, '../../db/db.json'),
+        JSON.stringify(notesArray), err => {
+            if (err) throw err;
+        });
+    return res.json(notesArray);
+
+
+    
 });
+
+router.delete('/notes', (req, res) => {
+
+})
+
 
 module.exports = router;
