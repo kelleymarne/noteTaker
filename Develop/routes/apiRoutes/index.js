@@ -18,7 +18,7 @@ router.post('/notes', (req, res) => {
     //     text: req.body.text,
     // };
     notesArray.push(newNote);
-    let id = 0;
+    let id = 1;
     notesArray.forEach((note) => {
         note.id = id;
         id++;
@@ -37,16 +37,17 @@ router.post('/notes', (req, res) => {
 });
 
 router.delete('/notes/:id', (req, res) => {
-    const deleteNote = req.params.id;
-    for (let i = 0; i < notes.length; i++) {
-        if(notes[i].id === Number(deleteNote)) {
-            notes.splice(i, 1);
-        };
-       fs.writeFile(path.join(__dirname, '../../db/db.json'), (err) => {
-           if (err) throw err;
-       });
-    }
-});
+    let noteId = req.params.id.toString();
+    let notesArray = JSON.parse(fs.readFileSync(path.join(__dirname, '../../db/db.json'), 'utf8'));
+  
+    const newSavedNotes = notesArray.filter(note => note.id.toString() !== noteId);
+  
+    fs.writeFileSync(
+        path.join(__dirname, '../../db/db.json'), 
+        JSON.stringify(newSavedNotes));
+    res.json(newSavedNotes); 
+  
+  });
 
 
 module.exports = router;
