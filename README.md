@@ -40,7 +40,7 @@ I was really excited to get the DELETE route to work. I know it wasn't required,
 
 <a href="https://notetaker-ch11.herokuapp.com/">Live Heroku Deploy</a>
 
-<a href="https://www.youtube.com/watch?v=eVGEea7adDM"> YouTube</a>
+<a href="https://youtu.be/-IcBXpPAFLE"> YouTube Walkthrough</a>
 
 <a href="https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwiLjJ7fosLvAhWXW80KHawRD_oQPAgI">Google</a>
 
